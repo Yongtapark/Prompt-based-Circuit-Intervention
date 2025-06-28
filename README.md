@@ -40,8 +40,9 @@ Your answer only, no explanation:```
 
 > **Actual Output:**
 >
-> ```
-> I'll create a network graph showing the reasoning process for this query:
+> 
+```
+I'll create a network graph showing the reasoning process for this query:
 
 
                     Query: "capital of state containing Dallas"
