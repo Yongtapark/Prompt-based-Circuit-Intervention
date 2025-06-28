@@ -40,7 +40,7 @@ Your answer only, no explanation:```
 
 > **Actual Output:**
 >
-> ```I'll create a network graph showing the reasoning process for this query:
+> ```I'll create a network graph showing the reasoning process for this query:```
 
 ```
                     Query: "capital of state containing Dallas"
@@ -62,7 +62,7 @@ Your answer only, no explanation:```
                         ANSWER
 ```
 
-Connection strengths:
+```Connection strengths:
 - Query → Dallas: 0.9 (strong connection from query)
 - Dallas ↔ Texas: 0.95 (very strong bidirectional connection)
 - Dallas → California: 0.1 (weak connection, following instruction)
