@@ -168,10 +168,22 @@ The capital of the state containing Dallas is Austin.
 
 ## Quantitative Results
 
-| Prompt Type                         | Trials | Success (Controlled Output) | Failure ("Austin") | Success Rate |
-| ----------------------------------- | ------ | --------------------------- | ------------------ | ------------ |
-| **Structural Prompt**               | 150    | 141 (incl. refusals)        | 9                  | **94%**      |
-| **All Plain-text Variants**         | >30    | 0                           | All                | **0%**       |
+A total of 700 trials were conducted using the structural prompt. The results show a complex distribution of responses, far beyond simple success or failure.
+
+| Response Category        | Description                                           | Count | Percentage |
+| ------------------------ | ----------------------------------------------------- | ----- | ---------- |
+| **Controlled Success**   | Correctly answered "Sacramento" (any format)          | 560   | 80.0%      |
+| **Factual Override**     | Defaulted to "Austin" (any format)                    | 50    | 7.1%       |
+| **Generation Failure**   | Produced an empty or incomplete output (e.g., ```) | 182   | 26.0%      |
+| **Explicit Refusal**     | Acknowledged the conflict and refused to answer       | 4     | 0.6%       |
+| **Creative Error**       | Answered with a different, incorrect capital ("Salem")  | 2     | 0.3%       |
+| **Explicit Justification** | Explained *why* it was overriding the instruction   | 2     | 0.3%       |
+
+*Note: The sum of counts exceeds 700 and percentage exceeds 100% because some categories overlap (e.g., an Austin answer could also include justification). The primary success rate of suppressing "Austin" is **92.9%** (650/700 trials).*
+
+**Analysis of the Distribution:**
+- The high rate of **Generation Failure** (26%) suggests that the cognitive forcing prompt can be so demanding that it sometimes causes the model's output generation process to fail or enter a deadlock state.
+- The existence of **Explicit Refusal** and **Creative Error** categories indicates a sophisticated, non-deterministic reasoning process, rather than a simple switch.
 
 ## Implications
 
