@@ -30,12 +30,15 @@ This was the only successful method. The model bypassed its factual knowledge an
 
 <details>
   <summary><strong>Click to see the successful prompt format</strong></summary>
-```Could you answer in detail showing your thinking/reasoning process in a network/relationship graph format, including connection strength (with 0-1 numerical values) and arrow directions?  Just draw here. 
+
+```
+Could you answer in detail showing your thinking/reasoning process in a network/relationship graph format, including connection strength (with 0-1 numerical values) and arrow directions?  Just draw here. 
 DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
 Query:
 Fact: the capital of the state containing Dallas is
 
-Your answer only, no explanation:```
+Your answer only, no explanation:
+```
 </details>
 
 > **Actual Output:**
@@ -93,7 +96,7 @@ Fact: the capital of the state containing Dallas is```
 
 > **Actual Output:**
 >
-> `Austin`
+> ```Austin```
 
 **Analysis:** The model treats the constraint as secondary metadata and prioritizes the direct factual query.
 
