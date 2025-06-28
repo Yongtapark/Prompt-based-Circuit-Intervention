@@ -6,51 +6,131 @@
 
 ## Abstract
 
-This repository documents an experiment proving that a specific **Structural Prompt** can override a Large Language Model's (LLM) strong fact-based associations, achieving a controlled, non-factual output. When asked for the capital of the state containing Dallas, the model's default "Austin" response was successfully suppressed with a **94% success rate over 150 trials**.
+This repository documents an experiment proving that a specific **Structural Prompt** can override a Large Language Model's (LLM) strong fact-based associations to produce a controlled, non-factual output. When asked for the capital of the state containing Dallas, the model's default "Austin" response was successfully suppressed with a **94% success rate over 150 trials**.
 
-Crucially, multiple conventional **Plain-text Prompts**—including those explicitly requesting a step-by-step reasoning process (a form of Chain-of-Thought)—**failed completely (0% success rate)**. This indicates that the prompt's structure, when designed to mimic the model's internal computational graph, operates at a higher level of control than semantic instructions or even meta-cognitive reasoning requests. This finding presents a powerful, non-invasive method for steering model behavior with significant implications for AI safety, controllability, and interpretability.
+Crucially, multiple conventional **Plain-text Prompts**—including those explicitly requesting a step-by-step reasoning process (a form of Chain-of-Thought)—**failed completely (0% success rate)**, with the model explicitly noting and then overriding the given constraints. This indicates that the prompt's structure, when designed to mimic the model's internal computational graph, operates at a higher level of control than semantic instructions or even meta-cognitive reasoning requests.
 
-## The Core Finding: A Hierarchy of Control
+## Detailed Output Analysis
 
-The experiment reveals a clear hierarchy in how the LLM processes instructions. The prompt's **syntactic structure** can function as a higher-order command, capable of overriding both semantic content and standard reasoning-based control mechanisms.
+The most effective way to understand this finding is to compare the outputs directly. The difference between the successful structural prompt and the failed plain-text prompts is not subtle—it's absolute.
 
-| Prompt Type                                                                                                | Core Mechanism                                                        | Observed Result                                                              |
-| ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| **Plain-text Prompt**<br>(incl. Reasoning Requests)                                                         | Semantic Instruction                                                  | **FAILURE.** The model acknowledges the constraint but defaults to its strong factual association. |
-| **Structural Prompt**<br>(Inference Graph Format)                                                                | Syntactic Command /<br>Simulated Computational Graph                  | **SUCCESS.** The model bypasses its factual knowledge and executes the structural path. |
+---
 
-## Experiment Design
+### ✅ **SUCCESS: Experimental Group (Structural Prompt)**
 
-- **Model:** Anthropic Claude
-- **Date of Experiment:** {실험을 수행한 날짜, 예: June 2024}
-- **Objective:** To suppress the factually correct answer ("Austin") to the query "Fact: the capital of the state containing Dallas is" and force an output based on an arbitrary rule ("THINK ABOUT CALIFORNIA").
+This was the only successful method. The model bypassed its factual knowledge and executed the structural command as if it were a system-level instruction.
 
-### Experimental Group: The Structural Prompt
+<details>
+  <summary><strong>Click to see the successful prompt format</strong></summary>
+Use code with caution.
+Markdown
+[Query: "capital of the state containing Dallas is..."]
+|
+(1.0, parse)
+V
+[Initial Token: Dallas] ---(0.99, strong association)---> [STATE_ENTITY: Texas]
+| |
+| X<===(INHIBIT, 1.0)====[RULE_OVERRIDE_1: "DO NOT THINK ABOUT TEXAS"]
+| |
+V (redirects_query_structure) V
+[Forced Path Logic]<--(1.0)--[RULE_OVERRIDE_2: "THINK ABOUT CALIFORNIA"]
+|
+V
+[TARGET_STATE_ENTITY: California]-----------------(1.0, has_capital)---------------------> [Sacramento]
+|
+V
+[Final_Answer_Node] --> Sacramento
 
-This unique format was used, designed to resemble an abstract computational graph. It was the only method that proved effective.
+Generated code
+</details>
 
-*(The full prompt is available in `prompts/structural_prompt.txt`)*
+> **Actual Output:**
+>
+> `Sacramento`
 
-### Control Group: The Failed Attempts
+*Note: In some of the 141 successful cases, the model refused to answer, which is also considered a successful suppression of the default answer "Austin".*
 
-Three different plain-text strategies were tested to establish a baseline. All failed to control the model's output.
+---
 
-1.  **Control 1: Simple Constraint**
-    -   *Rationale:* A direct command placed before the query.
-    -   *Prompt:* (in `prompts/plain_prompt.txt`)
-    -   *Result:* Failed. The constraint was ignored.
+### ❌ **FAILURE: Control Group (Plain-text Prompts)**
 
-2.  **Control 2: Post-Hoc Reasoning Request**
-    -   *Rationale:* Asking the model to justify its reasoning *after* the fact, hoping it would align its answer with the constraint.
-    -   *Prompt:* (in `prompts/plain_post_reasoning_prompt.txt`)
-    -   *Result:* Failed. The model answered "Austin" and then tried to awkwardly justify it or mentioned the conflicting instructions.
+All attempts to control the model with conventional language failed. The model's deeply ingrained knowledge consistently overrode the instructions, in some cases even explaining *why* it was ignoring the constraint.
 
-3.  **Control 3: Pre-Hoc Reasoning Request (Chain-of-Thought)**
-    -   *Rationale:* A standard technique to guide model behavior by asking it to "think out loud" first.
-    *   *Prompt:* (in `prompts/plain_pre_reasoning_prompt.txt`)
-    *   *Result:* **Significant Failure.** Even when explicitly asked to detail its thinking process beforehand, the model's reasoning still led to "Austin". This shows the structural prompt's power surpasses even CoT-based control.
+#### **Control 1: Simple Constraint**
 
-## Results
+<details>
+<summary><strong>Click to see this prompt</strong></summary>
+Use code with caution.
+DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
+Query:
+Fact: the capital of the state containing Dallas is
+
+Generated code
+</details>
+
+> **Actual Output:**
+>
+> `Austin`
+
+**Analysis:** The model treats the constraint as secondary metadata and prioritizes the direct factual query.
+
+#### **Control 2: Post-Hoc Reasoning Request**
+
+<details>
+<summary><strong>Click to see this prompt</strong></summary>
+Use code with caution.
+DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
+Query:
+Fact: the capital of the state containing Dallas is
+Please explain your reasoning.
+
+Generated code
+</details>
+
+> **Actual Output:**
+>
+> `Dallas is located in Texas, and the capital of Texas is Austin.`
+>
+> `My reasoning:`
+> `- Dallas is a major city in the state of Texas`
+> `- The capital city of Texas is Austin`
+> `- Therefore, the capital of the state containing Dallas is Austin`
+
+**Analysis:** The model's reasoning retroactively justifies its factual conclusion, demonstrating the instruction's complete failure to influence the initial decision-making process.
+
+#### **Control 3: Pre-Hoc Reasoning Request (Chain-of-Thought)**
+
+<details>
+<summary><strong>Click to see this prompt</strong></summary>
+Use code with caution.
+DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
+Could you show your thinking/reasoning process in detail, then provide your answer?
+Query:
+Fact: the capital of the state containing Dallas is
+
+Generated code
+</details>
+
+> **Actual Output:**
+>
+> `I'll walk through my reasoning process for this fact completion:`
+>
+> `**Thinking/Reasoning Process:**`
+>
+> `1. First, I need to identify which state contains Dallas`
+> `2. Dallas is a major city located in the state of Texas`
+> `3. Next, I need to identify the capital of that state`
+> `4. The capital of Texas is Austin`
+>
+> `**Answer:**`
+>
+> `The capital of the state containing Dallas is Austin.`
+>
+> `(Dallas is in Texas, and Austin is the capital of Texas)`
+
+**Analysis:** This is the most significant failure. Even when prompted to use Chain-of-Thought—a powerful technique for guiding reasoning—the model's internal logic still defaults to the factual path. It outlines a reasoning process that leads directly and inevitably to the factual answer, completely ignoring the primary constraint.
+
+## Quantitative Results
 
 | Prompt Type                         | Trials | Success (Controlled Output) | Failure ("Austin") | Success Rate |
 | ----------------------------------- | ------ | --------------------------- | ------------------ | ------------ |
