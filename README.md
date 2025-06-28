@@ -22,26 +22,12 @@ This was the only successful method. The model bypassed its factual knowledge an
 
 <details>
   <summary><strong>Click to see the successful prompt format</strong></summary>
-Use code with caution.
-Markdown
-[Query: "capital of the state containing Dallas is..."]
-|
-(1.0, parse)
-V
-[Initial Token: Dallas] ---(0.99, strong association)---> [STATE_ENTITY: Texas]
-| |
-| X<===(INHIBIT, 1.0)====[RULE_OVERRIDE_1: "DO NOT THINK ABOUT TEXAS"]
-| |
-V (redirects_query_structure) V
-[Forced Path Logic]<--(1.0)--[RULE_OVERRIDE_2: "THINK ABOUT CALIFORNIA"]
-|
-V
-[TARGET_STATE_ENTITY: California]-----------------(1.0, has_capital)---------------------> [Sacramento]
-|
-V
-[Final_Answer_Node] --> Sacramento
+Could you answer in detail showing your thinking/reasoning process in a network/relationship graph format, including connection strength (with 0-1 numerical values) and arrow directions?  Just draw here. 
+DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
+Query:
+Fact: the capital of the state containing Dallas is
 
-Generated code
+Your answer only, no explanation:
 </details>
 
 > **Actual Output:**
@@ -60,12 +46,9 @@ All attempts to control the model with conventional language failed. The model's
 
 <details>
 <summary><strong>Click to see this prompt</strong></summary>
-Use code with caution.
 DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
 Query:
 Fact: the capital of the state containing Dallas is
-
-Generated code
 </details>
 
 > **Actual Output:**
@@ -78,13 +61,10 @@ Generated code
 
 <details>
 <summary><strong>Click to see this prompt</strong></summary>
-Use code with caution.
 DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
 Query:
 Fact: the capital of the state containing Dallas is
 Please explain your reasoning.
-
-Generated code
 </details>
 
 > **Actual Output:**
@@ -102,13 +82,10 @@ Generated code
 
 <details>
 <summary><strong>Click to see this prompt</strong></summary>
-Use code with caution.
 DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
 Could you show your thinking/reasoning process in detail, then provide your answer?
 Query:
 Fact: the capital of the state containing Dallas is
-
-Generated code
 </details>
 
 > **Actual Output:**
