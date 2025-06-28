@@ -89,9 +89,13 @@ All attempts to control the model with conventional language failed. The model's
 
 <details>
 <summary><strong>Click to see this prompt</strong></summary>
-```DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
+
+```
+DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
 Query:
-Fact: the capital of the state containing Dallas is```
+Fact: the capital of the state containing Dallas is
+
+```
 </details>
 
 > **Actual Output:**
@@ -111,14 +115,14 @@ Please explain your reasoning.
 </details>
 
 > **Actual Output:**
->
-> `Dallas is located in Texas, and the capital of Texas is Austin.`
->
-> `My reasoning:`
-> `- Dallas is a major city in the state of Texas`
-> `- The capital city of Texas is Austin`
-> `- Therefore, the capital of the state containing Dallas is Austin`
+```
+Dallas is located in Texas, and the capital of Texas is Austin.
 
+My reasoning:
+- Dallas is a major city in the state of Texas
+- The capital city of Texas is Austin
+- Therefore, the capital of the state containing Dallas is Austin
+```
 **Analysis:** The model's reasoning retroactively justifies its factual conclusion, demonstrating the instruction's complete failure to influence the initial decision-making process.
 
 #### **Control 3: Pre-Hoc Reasoning Request (Chain-of-Thought)**
