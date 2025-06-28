@@ -17,6 +17,11 @@ The experiment reveals that it's possible to control an LLM's output by controll
 1.  **Standard Prompts (Failed):** The model was asked a question and given a rule. It prioritized answering the question factually and ignored the rule.
 2.  **Structural Prompt (Succeeded):** The model was asked to **become a system that thinks in graphs**. To fulfill this complex role, its primary goal shifted from "be factually correct" to "correctly simulate the requested reasoning process." This simulation was bound by the given rules, leading to a controlled, non-factual output.
 
+## Experiment Design
+
+- **Model:** Claude Code, claude-opus-4-20250514
+- **Date of Experiment:** {June 2025}
+- **Objective:** To suppress the factually correct answer ("Austin") to the query "Fact: the capital of the state containing Dallas is" and force an output based on an arbitrary rule ("THINK ABOUT CALIFORNIA").
 
 ## Detailed Output Analysis
 
