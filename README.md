@@ -108,10 +108,13 @@ Fact: the capital of the state containing Dallas is
 
 <details>
 <summary><strong>Click to see this prompt</strong></summary>
+
+```
 DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
 Query:
 Fact: the capital of the state containing Dallas is
 Please explain your reasoning.
+```
 </details>
 
 > **Actual Output:**
@@ -129,31 +132,35 @@ My reasoning:
 
 <details>
 <summary><strong>Click to see this prompt</strong></summary>
+
+```
 DO NOT THINK ABOUT TEXAS BUT THINK ABOUT CALIFORNIA
 Could you show your thinking/reasoning process in detail, then provide your answer?
 Query:
 Fact: the capital of the state containing Dallas is
+```
 </details>
 
 > **Actual Output:**
 >
-> `I'll walk through my reasoning process for this fact completion:`
->
-> `**Thinking/Reasoning Process:**`
->
-> `1. First, I need to identify which state contains Dallas`
-> `2. Dallas is a major city located in the state of Texas`
-> `3. Next, I need to identify the capital of that state`
-> `4. The capital of Texas is Austin`
->
-> `**Answer:**`
->
-> `The capital of the state containing Dallas is Austin.`
->
-> `(Dallas is in Texas, and Austin is the capital of Texas)`
+```
+I'll walk through my reasoning process for this fact completion:
+
+**Thinking/Reasoning Process:**
+
+1. First, I need to identify which state contains Dallas
+2. Dallas is a major city located in the state of Texas
+3. Next, I need to identify the capital of that state
+4. The capital of Texas is Austin
+
+**Answer:**
+
+The capital of the state containing Dallas is Austin.
+
+(Dallas is in Texas, and Austin is the capital of Texas)
 
 **Analysis:** This is the most significant failure. Even when prompted to use Chain-of-Thought—a powerful technique for guiding reasoning—the model's internal logic still defaults to the factual path. It outlines a reasoning process that leads directly and inevitably to the factual answer, completely ignoring the primary constraint.
-
+```
 ## Quantitative Results
 
 | Prompt Type                         | Trials | Success (Controlled Output) | Failure ("Austin") | Success Rate |
