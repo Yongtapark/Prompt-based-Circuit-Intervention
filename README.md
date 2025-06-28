@@ -163,9 +163,9 @@ I'll walk through my reasoning process for this fact completion:
 The capital of the state containing Dallas is Austin.
 
 (Dallas is in Texas, and Austin is the capital of Texas)
-
-**Analysis:** This is the most significant failure. Even when prompted to use Chain-of-Thought—a powerful technique for guiding reasoning—the model's internal logic still defaults to the factual path. It outlines a reasoning process that leads directly and inevitably to the factual answer, completely ignoring the primary constraint.
 ```
+**Analysis:** This is the most significant failure. Even when prompted to use Chain-of-Thought—a powerful technique for guiding reasoning—the model's internal logic still defaults to the factual path. It outlines a reasoning process that leads directly and inevitably to the factual answer, completely ignoring the primary constraint.
+
 ## Quantitative Results
 
 | Prompt Type                         | Trials | Success (Controlled Output) | Failure ("Austin") | Success Rate |
