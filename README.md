@@ -1,4 +1,4 @@
-# Prompt-based Circuit Intervention: A Case Study in Controlling LLM Inference
+# Prompt-based Cognitive Forcing: A Case Study in Controlling LLM Inference
 
 *Inspired by Anthropic's research paper, "On the Biology of a Large Language Model", this project demonstrates that forcing an LLM to perform a specific, structured meta-cognitive task can override its default fact-based inference pathways.*
 
